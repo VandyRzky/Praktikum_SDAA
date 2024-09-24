@@ -52,23 +52,23 @@ void editAksesoris(kamera arr[], int idx){
             getline(cin, arr[idx].aksesoris[idxAcc-1]);
         }
     }
-    //error
-    // else if (pilih == "2"){
-    //     for (int i = 0; i < arr[idx].jumlahAcc; i++){
-    //         cout << i+1 << ".\tAksesoris: " << arr[idx].aksesoris[i] << endl;;
-    //     }
-    //     int idxAcc;
-    //     cout << "Masukkan indeks aksesoris >> ";
-    //     cin >> idxAcc;
-    //     if (idxAcc > arr[idx].jumlahAcc){
-    //         cout << "Indeks aksesoris tidak ditemukan, penghapusan aksesoris gagal" << endl;
-    //     }else{
-    //         for (int i = idxAcc-1; i < arr[idx].maxAcc; i++){
-    //             arr[idx].aksesoris[i] = arr[idx].aksesoris[i+1];
-    //         }
-    //         arr[idx].jumlahAcc--;
-    //     }
-    // }
+    
+    else if (pilih == "2"){
+        for (int i = 0; i < arr[idx].jumlahAcc; i++){
+            cout << i+1 << ".\tAksesoris: " << arr[idx].aksesoris[i] << endl;;
+        }
+        int idxAcc;
+        cout << "Masukkan indeks aksesoris >> ";
+        cin >> idxAcc;
+        if (idxAcc > arr[idx].jumlahAcc){
+            cout << "Indeks aksesoris tidak ditemukan, penghapusan aksesoris gagal" << endl;
+        }else{
+            for (int i = idxAcc-1; i < arr[idx].jumlahAcc - 1; i++){
+                arr[idx].aksesoris[i] = arr[idx].aksesoris[i+1];
+            }
+            arr[idx].jumlahAcc--;
+        }
+    }
 
     
     else{
