@@ -9,7 +9,81 @@ struct kamera{
     kamera* next;
 };
 
+void enqueue(kamera*& head, kamera*& tail, string idKamera, string namaKamera, string harga);
+void tampilkanKamera(kamera*& head);
+void editKamera(kamera*& head);
 
+void tambahKameraQueue(kamera*& head, kamera*& tail){
+    string idKamera, namaKamera, harga;
+    cin.ignore();
+    cout << "Masukkan ID kamera >> ";
+    getline(cin, idKamera);
+    cout << "Masukkan nama kamera >> ";
+    getline(cin, namaKamera);
+    cout << "Masukkan harga kamera >> ";
+    getline(cin, harga);
+
+    enqueue(head, tail, idKamera, namaKamera, harga);
+}
+
+void enqueue(kamera*& head, kamera*& tail, string idKamera, string namaKamera, string harga){
+    kamera* tambahKamera = new kamera();
+    tambahKamera->nama = namaKamera;
+    tambahKamera->harga = harga;
+    tambahKamera->idKamera = idKamera;
+    tambahKamera->next = nullptr;
+
+    if (head == nullptr){
+        head = tambahKamera;
+        tail = tambahKamera; 
+    }else{
+        tail->next = tambahKamera;
+        tail = tambahKamera; 
+    }
+}
+
+void dequeue(kamera*& head, kamera*& tail){
+    if (head == nullptr){
+        cout << "Belum ada data" << endl;
+        return;
+    }
+    kamera* temp = head;
+    head = head->next;
+    if (head == nullptr){
+        tail = nullptr; 
+    }
+    delete temp;
+    cout << "Kamera pertama berhasil dihapus dari queue" << endl;
+}
+
+void menuQueue(kamera*& head, kamera*& tail){
+    string pilih, ulang = "y";
+    while (ulang == "y"){
+        cout << "1. Tambah kamera\n"
+             << "2. Lihat kamera \n"
+             << "3. Hapus kamera\n"
+             << "4. Edit kamera\n"
+             << "5. Keluar\n";
+        cout << "Masukkan pilihan >> ";
+        cin >> pilih;
+        if (pilih == "1"){
+            tambahKameraQueue(head, tail);
+        }else if(pilih == "2"){
+            tampilkanKamera(head);
+        }else if(pilih == "3"){
+            dequeue(head, tail);
+        }else if (pilih == "4"){
+            editKamera(head);
+        }else if (pilih == "5"){
+            ulang = "t";
+        }else{
+            cout << "Pilihan tidak ada" << endl;
+        }
+    }
+}
+
+
+// Stack
 void push(kamera*& head, string idKamera, string namaKamera, string harga) {
     kamera* newKamera = new kamera();
     newKamera->idKamera = idKamera;
@@ -112,9 +186,23 @@ void menu(kamera*& head){
 }
 
 int main(int argc, char const* argv[]) {
-    kamera* head = nullptr;
+    string pilih;
 
-    menu(head);
+    cout<< "1. Stack\n"
+    "2. Queue\n";
+    cout << "Masukkan pilihan >>";
+    cin >> pilih;
+    if(pilih == "1"){
+        kamera* head = nullptr;
+        menu(head);
+    }else if(pilih == "2"){
+        kamera* head = nullptr;
+        kamera* tail = nullptr;
+        menuQueue(head, tail);
+    }else{
+        cout<< "Pilihan tidak ada"<< endl;
+    }
+
 
     return 0;
 }
